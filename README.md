@@ -1,10 +1,13 @@
 # workload-identity-is-up Rust
+![Docker Image Size (tag)](https://img.shields.io/docker/image-size/kartiksharma522/wi-is-up/latest)
+![Docker Pulls](https://img.shields.io/docker/pulls/kartiksharma522/wi-is-up)
+![GitHub](https://img.shields.io/github/license/crazystylus/wi-is-up)
+
 ## What
 Safe and tidy docker image to avoid race conditions with GKE Metadata Server based on Rust
 
 ## Why Rust Hyper and not Alpinecurl
 https://aws.amazon.com/blogs/opensource/how-using-hyper-in-curl-can-help-make-the-internet-safer/
-
 
 ## Why
 [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity) is a GKE feature that grants Kubernetes workloads (pods) ability to assume unique Google Service Account identity without relying on JSON Keys or node's identity. However, it has a [well documented](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity) flaw:
@@ -29,7 +32,7 @@ There are two problems with this approach:
 2. It is also **630MB** in size
 
 ## Solution
-Use `rust hyper` based `kartiksharma522/wi-is-up` instead which is **5.92** in size (106 times smaller!) and 5 lines of YAML shorter. This is safer than curl.
+Use `rust hyper` based `kartiksharma522/wi-is-up` instead which is **1.74MB** in size (362 times smaller!) and 5 lines of YAML shorter. This is safer than curl.
 ```yaml
 initContainers:
   - image: kartiksharma522/wi-is-up
@@ -38,3 +41,6 @@ initContainers:
 
 ## Warning
 This image is hosted on DockerHub for demonstration purposes only. It is not recommend to usw Docker Hub for production workloads due to the download rate limits that can impact availability of production applications.
+
+### Reference
+1. https://github.com/loveholidays/workload-identity-is-up
